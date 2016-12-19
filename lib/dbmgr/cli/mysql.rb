@@ -1,5 +1,5 @@
 module Dbmgr::CLI
-  class MySQL < Thor
+  class Mysql < Thor
 
     #
     # Backup
