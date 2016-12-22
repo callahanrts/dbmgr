@@ -1,3 +1,5 @@
+require 'yaml'
+
 module Dbmgr::CLI
   class Mysql < Thor
 
@@ -12,7 +14,7 @@ module Dbmgr::CLI
     method_option :dbuser, aliases: ["u"], type: :string, default: "root", banner: "root", desc: "MySQL database user"
 
     def backup db_name
-      puts "Backing up #{db_name}..."
+      puts "Backing up '#{db_name}' to '#{options[:path]}'..."
       file = options[:filename] || "#{db_name}_#{Time.now.to_i}.sql"
 
       # Create the backups directory if it doesn't exist already
@@ -45,6 +47,16 @@ module Dbmgr::CLI
 
       # Restore the database from a backup
       system("mysql -u#{options[:dbuser]} #{db_name} -h #{options[:dbhost]} -P #{options[:dbport]} < #{backup}")
+    end
+
+  private
+
+    def options
+      original = super
+      return original unless File.file?("#{ENV["HOME"]}/.dbmgr")
+      config = YAML::load_file("#{ENV["HOME"]}/.dbmgr") || {}
+      config[:dbmgr][:path].gsub!("~/", "#{ENV["HOME"]}/") # Expand ~/ manually
+      Thor::CoreExt::HashWithIndifferentAccess.new([original, config[:dbmgr], config[:mysql]].reduce &:merge)
     end
 
   end
