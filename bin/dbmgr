@@ -1,5 +1,9 @@
-#!/usr/bin/env ruby -WU
+#!/usr/bin/env ruby
+
+DBMGR_HOME = File.expand_path('../..', __FILE__)
+
+$LOAD_PATH.unshift(File.join(DBMGR_HOME, 'lib'))
 
 require 'dbmgr'
 
-Dbmgr::DbMgr.start( ARGV )
+Dbmgr::DbMgr.start(ARGV)
