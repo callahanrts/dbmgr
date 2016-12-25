@@ -9,6 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Cody"]
   spec.email         = ["callahanrts@gmail.com"]
 
+  spec.required_ruby_version = '< 2.4'
+
   spec.summary       = %q{Create database backups and restore from previously created backups}
   spec.description   = %q{Create database backups to share with others across your dev team. Other developers can restore from backups you've created.}
   spec.homepage      = "https://github.com/callahanrts/dbmgr"
@@ -18,7 +20,7 @@ Gem::Specification.new do |spec|
     f.match(%r{^(test|spec|features)/})
   end
   spec.bindir        = "bin"
-  spec.executables   = spec.files.grep(%r{^bin/dbmgr}) { |f| File.basename(f) }
+  spec.executables   = spec.files.grep(%r{^bin/dbmgr$}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
   spec.add_dependency 'thor'
