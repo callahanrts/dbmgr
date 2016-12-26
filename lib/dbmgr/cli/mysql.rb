@@ -42,8 +42,8 @@ module Dbmgr::CLI
                   desc: "MySQL database user"
 
     def backup db_name
-      puts "Backing up '#{db_name}' to '#{options[:path]}'..."
       file = options[:filename] || "#{db_name}_#{Time.now.to_i}.sql"
+      puts "Backing up '#{db_name}' (#{options[:path]}/#{file})..."
 
       # Create the backups directory if it doesn't exist already
       system "mkdir -p #{options[:path]}"
@@ -112,7 +112,7 @@ module Dbmgr::CLI
       return original unless File.file?("#{ENV["HOME"]}/.dbmgr")
       config = YAML::load_file("#{ENV["HOME"]}/.dbmgr") || {}
       config[:dbmgr][:path].gsub!("~/", "#{ENV["HOME"]}/") # Expand ~/ manually
-      Thor::CoreExt::HashWithIndifferentAccess.new([original, config[:dbmgr], config[:mysql]].reduce &:merge)
+      Thor::CoreExt::HashWithIndifferentAccess.new([config[:dbmgr], config[:mysql], original].reduce &:merge)
     end
 
   end
