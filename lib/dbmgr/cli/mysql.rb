@@ -20,21 +20,21 @@ module Dbmgr::CLI
                   banner: "#{ENV["HOME"]}/.db_backups",
                   desc: "Directory of database backups"
 
-    method_option :dbport,
+    method_option :port,
                   aliases: ["P"],
                   type: :numeric,
                   default: 3306,
                   banner: "3306",
                   desc: "MySQL database port"
 
-    method_option :dbhost,
+    method_option :host,
                   aliases: ["h"],
                   type: :string,
                   default: "localhost",
                   banner: "localhost",
                   desc: "MySQL database host"
 
-    method_option :dbuser,
+    method_option :user,
                   aliases: ["u"],
                   type: :string,
                   default: "root",
@@ -49,7 +49,7 @@ module Dbmgr::CLI
       system "mkdir -p #{options[:path]}"
 
       # Create a mysql backup from the user supplied options
-      system "mysqldump -u#{options[:dbuser]} -h #{options[:dbhost]} -P #{options[:dbport]} #{db_name} > #{options[:path]}/#{file}"
+      system "mysqldump -u#{options[:user]} -h #{options[:host]} -P #{options[:port]} #{db_name} > #{options[:path]}/#{file}"
     end
 
 
@@ -70,21 +70,21 @@ module Dbmgr::CLI
                   banner: "#{ENV["HOME"]}/.db_backups",
                   desc: "Directory of database backups"
 
-    method_option :dbport,
+    method_option :port,
                   aliases: ["P"],
                   type: :numeric,
                   default: 3306,
                   banner: "3306",
                   desc: "MySQL database port"
 
-    method_option :dbhost,
+    method_option :host,
                   aliases: ["h"],
                   type: :string,
                   default: "localhost",
                   banner: "localhost",
                   desc: "MySQL database host"
 
-    method_option :dbuser,
+    method_option :user,
                   aliases: ["u"],
                   type: :string,
                   default: "root",
@@ -95,24 +95,28 @@ module Dbmgr::CLI
       puts "Create database if it doesn't exist..."
 
       # Create the database to restore if it doesn't exist already
-      system "mysql -u#{options[:dbuser]} -h #{options[:dbhost]} -P #{options[:dbport]} -e \"CREATE DATABASE IF NOT EXISTS #{db_name}\""
+      system "mysql -u#{options[:user]} -h #{options[:host]} -P #{options[:port]} -e \"CREATE DATABASE IF NOT EXISTS #{db_name}\""
 
       # Grab the backup file or the latest backup from the backups directory
       backup = options[:backup] || Dir.glob("#{options[:path]}/#{db_name}_*.sql").last
-      raise "Restore failed: backup not found" unless File.file?(backup)
+      raise "Restore failed: backup not found" unless File.file?(backup.to_s)
 
       # Restore the database from a backup
-      system("mysql -u#{options[:dbuser]} #{db_name} -h #{options[:dbhost]} -P #{options[:dbport]} < #{backup}")
+      system("mysql -u#{options[:user]} #{db_name} -h #{options[:host]} -P #{options[:port]} < #{backup}")
     end
 
   private
 
     def options
       original = super
-      return original unless File.file?("#{ENV["HOME"]}/.dbmgr")
-      config = YAML::load_file("#{ENV["HOME"]}/.dbmgr") || {}
-      config[:dbmgr][:path].gsub!("~/", "#{ENV["HOME"]}/") # Expand ~/ manually
+      return original unless File.file?("#{home}/.dbmgr")
+      config = YAML::load_file("#{home}/.dbmgr") || {dbmgr: {}, mysql: {}}
+      config[:dbmgr][:path].gsub!("~/", "#{home}/") if !config[:dbmgr].nil? && config[:dbmgr].has_key?(:path) # Expand ~/ manually
       Thor::CoreExt::HashWithIndifferentAccess.new([config[:dbmgr], config[:mysql], original].reduce &:merge)
+    end
+
+    def home
+      ENV["HOME"]
     end
 
   end
