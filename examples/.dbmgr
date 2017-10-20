@@ -1,8 +1,0 @@
-:dbmgr:
-  :path: "~/Documents/shortstack_apps/db_backups"
-
-:mysql:
-  :port: 3307
-  :host: 'localhost'
-  :user: "root"
-
