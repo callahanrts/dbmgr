@@ -9,7 +9,8 @@ tool for:
 ## Installation
 
 ```
-$ brew install callahanrts/dbmgr/dbmgr
+$ brew tap callahanrts/dbmgr
+$ brew install dbmgr
 ```
 or
 ```
