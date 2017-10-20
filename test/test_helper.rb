@@ -1,20 +1,17 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'dbmgr'
-require 'mysql2'
 
+HOME = '/tmp/dbmgr'
+ENV["HOME"] = HOME
+BACKUPS = "#{HOME}/.db_backups"
+NAMES = ["fred", "joe", "bob", "sue", "jane"]
+
+require 'dbmgr'
 require 'minitest/autorun'
 require 'mocha/mini_test'
+require 'helpers/mysql_helper'
 
-def init_mysql_database
-  client = Mysql2::Client.new(:host => "localhost", :username => "root")
-  client.query("DROP DATABASE IF EXISTS dbmgr_test")
-  client.query("CREATE DATABASE dbmgr_test")
-
-  client = Mysql2::Client.new(:host => "localhost", :username => "root", :database => "dbmgr_test")
-  client.query("CREATE TABLE users (name VARCHAR(20))")
-  client.query("INSERT INTO users VALUES ('fred')")
-  client.query("INSERT INTO users VALUES ('joe')")
-  client.query("INSERT INTO users VALUES ('bob')")
-  client.query("INSERT INTO users VALUES ('sue')")
-  client.query("INSERT INTO users VALUES ('jane')")
+def database_helper(database)
+  case database.to_sym
+  when :mysql then MySQLHelper.new NAMES
+  end
 end

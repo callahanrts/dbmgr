@@ -6,4 +6,4 @@ $LOAD_PATH.unshift(File.join(DBMGR_HOME, 'lib'))
 
 require 'dbmgr'
 
-Dbmgr::DbMgr.start(ARGV)
+Dbmgr::CLI.start(ARGV)
