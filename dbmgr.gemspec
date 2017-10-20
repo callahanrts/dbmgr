@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Cody"]
   spec.email         = ["callahanrts@gmail.com"]
 
-  spec.required_ruby_version = '< 2.4'
+  spec.required_ruby_version = '< 2.5'
 
   spec.summary       = %q{Create database backups and restore from previously created backups}
   spec.description   = %q{Create database backups to share with others across your dev team. Other developers can restore from backups you've created.}
@@ -23,11 +23,11 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^bin/dbmgr$}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'thor'
+  spec.add_dependency 'thor', "~> 0"
 
   spec.add_development_dependency "bundler", "~> 1.13"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "minitest", "~> 5.0"
   spec.add_development_dependency "mysql2", "~> 0.4.5"
-  spec.add_development_dependency "mocha", "~> 1.2.1"
+  spec.add_development_dependency "mocha", "~> 1.2"
 end

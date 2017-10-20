@@ -1,7 +1,9 @@
+require 'fileutils'
+
 # MySQL Module
 module MySQL
   def backup(db_name)
-    Dir.mkdir @path
+    FileUtils::mkdir_p @path
 
     # Create a mysql backup from the user supplied options
     system backup_db_command db_name
