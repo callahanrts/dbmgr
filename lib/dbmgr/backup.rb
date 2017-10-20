@@ -23,7 +23,7 @@ module Dbmgr
                   aliases: ["P"],
                   type: :numeric,
                   default: 3306,
-                  banner: "3305",
+                  banner: "3306",
                   desc: "MySQL database port"
 
     method_option :host,

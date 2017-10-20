@@ -33,21 +33,6 @@ $ dmgr mysql backup --options
 $ dbmgr mysql restore --options
 ```
 
-#### Config
-Options can either be passed in each command or they can be set as defaults in the `~/.dbmgr`
-config file.
-```ruby
-# ~/.dbmgr
-
-:dbmgr:
-  :path: "~/.db_backups"
-
-:mysql:
-  :port: 3306
-  :host: 'localhost'
-  :user: "root"
-```
-
 ## Examples
 #### Back up a MySQL database
 
