@@ -6,3 +6,5 @@ services:
 rvm:
   - 2.3.1
 before_install: gem install bundler -v 1.13.6
+before_script:
+  - psql -c 'create database travis;' -U postgres
