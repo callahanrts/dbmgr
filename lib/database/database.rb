@@ -1,3 +1,6 @@
+require "database/mysql"
+require "database/postgresql"
+
 # Database Class
 class Database
   def initialize(options = {})

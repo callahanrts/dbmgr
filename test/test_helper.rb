@@ -4,6 +4,7 @@ HOME = '/tmp/dbmgr'
 ENV["HOME"] = HOME
 BACKUPS = "#{HOME}/.db_backups"
 NAMES = ["fred", "joe", "bob", "sue", "jane"]
+DATABASES = [:mysql, :psql]
 
 require 'dbmgr'
 require 'minitest/autorun'

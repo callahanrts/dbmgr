@@ -2,7 +2,7 @@ require 'test_helper'
 
 describe Dbmgr::CLI do
 
-  Dbmgr::DATABASES.keys.each do |database|
+  DATABASES.each do |database|
     describe "when restoring a #{database} database" do
       before do
         @db = database_helper database
