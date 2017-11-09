@@ -1,6 +1,5 @@
 require 'fileutils'
 
-# MySQL Module
 module MySQL
   def backup(db_name)
     FileUtils::mkdir_p @path

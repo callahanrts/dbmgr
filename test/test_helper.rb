@@ -9,9 +9,11 @@ require 'dbmgr'
 require 'minitest/autorun'
 require 'mocha/mini_test'
 require 'helpers/mysql_helper'
+require 'helpers/postgresql_helper'
 
 def database_helper(database)
   case database.to_sym
   when :mysql then MySQLHelper.new NAMES
+  when :psql then PostgreSQLHelper.new NAMES
   end
 end

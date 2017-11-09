@@ -26,7 +26,7 @@ class MySQLHelper
   def initialize_database
     client = mysql_client
     client.query("DROP DATABASE IF EXISTS #{DB_NAME}")
-    client.query("CREATE DATABASE dbmgr_test")
+    client.query("CREATE DATABASE #{DB_NAME}")
   end
 
   def insert_users names
@@ -39,7 +39,7 @@ class MySQLHelper
 
   def mysql_client(db_name = nil)
     options = { host: "localhost", username: "root" }
-    options.merge!(database: "dbmgr_test") unless db_name.nil?
+    options.merge!(database: db_name) unless db_name.nil?
     Mysql2::Client.new(options)
   end
 

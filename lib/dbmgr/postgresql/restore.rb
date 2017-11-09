@@ -1,15 +1,13 @@
-module Dbmgr
-  class CLI < Thor
 
-    #
-    # Restore
-    #
-    desc "backup", "Restore from a backup"
+module Dbmgr
+  class PostgreSQLCLI < Thor
+
+    desc "restore", "Restore from a backup"
     method_option :backup,
                   aliases: ["b"],
                   type: :string,
                   banner: "#{ENV["HOME"]}/.db_backups/backup.sql",
-                  desc: "Path to backup to backup from"
+                  desc: "Path to backup to restore from"
 
     method_option :path,
                   aliases: ["p"],
@@ -21,35 +19,28 @@ module Dbmgr
     method_option :port,
                   aliases: ["P"],
                   type: :numeric,
-                  default: 3306,
-                  banner: "3306",
-                  desc: "MySQL database port"
+                  default: 5432,
+                  banner: "5432",
+                  desc: "PostgreSQL database port"
 
     method_option :host,
                   aliases: ["h"],
                   type: :string,
                   default: "localhost",
                   banner: "localhost",
-                  desc: "MySQL database host"
+                  desc: "PostgreSQL database host"
 
     method_option :user,
                   aliases: ["u"],
                   type: :string,
-                  default: "root",
-                  banner: "root",
-                  desc: "MySQL database user"
+                  default: "postgres",
+                  banner: "postgres",
+                  desc: "PostgreSQL database user"
 
-    method_option :database,
-                  aliases: "d",
-                  type: :string,
-                  default: "mysql",
-                  banner: "mysql",
-                  desc: "Database type"
-
-    def backup db_name
+    def restore db_name
       Database.new(options)
-              .extend(DATABASES[options[:database].to_sym])
-              .backup db_name
+              .extend(PostgreSQL)
+              .restore db_name
     end
 
   end

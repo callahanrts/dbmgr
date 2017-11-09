@@ -17,51 +17,34 @@ or
 $ gem install dbmgr
 ```
 
-## Usage
-
-#### Help
-```
-$ dbmgr help
-```
-
-#### Backup
-```
-$ dmgr mysql backup --options
-```
-
-#### Restore
-```
-$ dbmgr mysql restore --options
-```
-
-## Examples
-#### Back up a MySQL database
-
+## Backup
+### Back up a MySQL database
 ```bash
 # Back up database from local MySQL server
-$ dbmgr mysql backup database_name
+$ dbmgr backup database_name -d mysql
 
 # Back up database from a remote MySQL server
-$ dbmgr mysql backup database_name -P 3307 -h 192.168.33.10 -u root
+$ dbmgr backup database_name -d mysql -P 3307 -h 192.168.33.10 -u root
 
 # Back up database and store in a specific location
-$ dbmgr mysql backup database_name -p ~/Downloads
+$ dbmgr backup database_name -d mysql -p ~/Downloads
 
 # Back up database as a named backup
-$ dbmgr mysql backup database_name -f my_backup.sql
+$ dbmgr backup database_name -d mysql -f my_backup.sql
 ```
 
-#### Restore a MySQL database
+## Restore
+### Restore a MySQL database
 ```bash
 # Restore local database from the latest backup in the default location
-$ dbmgr mysql restore database_name
+$ dbmgr restore database_name -d mysql
 
 # Restore remote database with the latest backup
-$ dbmgr mysql restore database_name -P 3307 -h 192.168.33.10 -u root
+$ dbmgr restore database_name -d mysql -P 3307 -h 192.168.33.10 -u root
 
 # Restore local database from the latest backup in a specific location
-$ dbmgr mysql restore database_name -p ~/Downloads
+$ dbmgr restore database_name -d mysql -p ~/Downloads
 
 # Restore database from a named backup
-$ dbmgr mysql restore database_name -f my_backup.sql
+$ dbmgr restore database_name -d mysql -f my_backup.sql
 ```

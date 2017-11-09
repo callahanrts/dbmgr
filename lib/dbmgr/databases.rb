@@ -1,6 +1,7 @@
 
 module Dbmgr
   DATABASES = {
-    mysql: MySQL
+    mysql: MySQL,
+    psql: PostgreSQL
   }
 end

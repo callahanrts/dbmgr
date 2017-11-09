@@ -1,15 +1,12 @@
 module Dbmgr
-  class CLI < Thor
+  class MySQLCLI < Thor
 
-    #
-    # Restore
-    #
-    desc "backup", "Restore from a backup"
-    method_option :backup,
-                  aliases: ["b"],
+    desc "backup [database_name]", "Create a backup"
+    method_option :filename,
+                  aliases: ["f"],
                   type: :string,
-                  banner: "#{ENV["HOME"]}/.db_backups/backup.sql",
-                  desc: "Path to backup to backup from"
+                  banner: "my_backup.sql",
+                  desc: "Name of the backup created"
 
     method_option :path,
                   aliases: ["p"],
@@ -35,23 +32,15 @@ module Dbmgr
     method_option :user,
                   aliases: ["u"],
                   type: :string,
-                  default: "root",
+                  default: 'root',
                   banner: "root",
                   desc: "MySQL database user"
 
-    method_option :database,
-                  aliases: "d",
-                  type: :string,
-                  default: "mysql",
-                  banner: "mysql",
-                  desc: "Database type"
-
     def backup db_name
       Database.new(options)
-              .extend(DATABASES[options[:database].to_sym])
+              .extend(MySQL)
               .backup db_name
     end
 
   end
 end
-
