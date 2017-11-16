@@ -1,4 +1,5 @@
 # Dbmgr
+[![Build Status](https://travis-ci.org/callahanrts/dbmgr.svg?branch=master)](https://travis-ci.org/callahanrts/dbmgr)
 
 `dbmgr` is a command line tool for backing up and restoring databases. It's a useful
 tool for:
