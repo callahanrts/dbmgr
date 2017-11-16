@@ -24,6 +24,9 @@ $ gem install dbmgr
 ```
 dbmgr [dbms] [action] --options-list
 ```
+### DBMSs
+- MySQL (mysql)
+- PostgreSQL (psql)
 
 ### Backup
 #### Back up a database
