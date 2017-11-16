@@ -1,7 +1,7 @@
 module Dbmgr
   class MySQLCLI < Thor
 
-    desc "backup [database_name]", "Create a backup"
+    desc "backup", "Create a backup"
     method_option :filename,
                   aliases: ["f"],
                   type: :string,

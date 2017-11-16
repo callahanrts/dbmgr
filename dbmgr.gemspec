@@ -12,7 +12,8 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '< 2.5'
 
   spec.summary       = %q{Create database backups and restore from previously created backups}
-  spec.description   = %q{Create database backups to share with others across your dev team. Other developers can restore from backups you've created.}
+  spec.description   = %q{Create database backups to share with others across your dev team.
+                          Other developers can restore from backups you've created.}
   spec.homepage      = "https://github.com/callahanrts/dbmgr"
   spec.license       = "MIT"
 

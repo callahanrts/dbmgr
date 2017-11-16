@@ -4,7 +4,7 @@ require 'dbmgr/postgresql/restore'
 module Dbmgr
   class CLI < Thor
 
-    desc "psql [COMMAND]", "Run commands on MySQL Databases"
+    desc "psql", "Run commands on PostgreSQL Databases"
     subcommand "psql", Dbmgr::PostgreSQLCLI
 
   end

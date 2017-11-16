@@ -2,4 +2,4 @@
 
 require 'dbmgr'
 
-Dbmgr::DbMgr.start( ARGV )
+Dbmgr::CLI.start( ARGV )
